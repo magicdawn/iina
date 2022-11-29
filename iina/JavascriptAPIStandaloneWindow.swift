@@ -15,6 +15,7 @@ import WebKit
   func close()
   func isOpen() -> Bool
   func loadFile(_ path: String)
+  func loadUrl(_ url: String)
   func simpleMode()
   func setStyle(_ style: String)
   func setContent(_ content: String)
@@ -68,6 +69,19 @@ class JavascriptAPIStandaloneWindow: JavascriptAPI, JavascriptAPIStandaloneWindo
     inSimpleMode = false
     Utility.executeOnMainThread {
       pluginInstance.standaloneWindow.webView.loadFileURL(url, allowingReadAccessTo: rootURL)
+      pluginInstance.standaloneWindow.webView.configuration.preferences.setValue(
+        true, forKey: "developerExtrasEnabled")
+    }
+    messageHub.clearListeners()
+  }
+  
+  func loadUrl(_ url: String) {
+    inSimpleMode = false
+    Utility.executeOnMainThread {
+      let webview = pluginInstance.standaloneWindow.webView!
+      webview.load(URLRequest(url: URL(string: url)!))
+      webview.configuration.preferences.setValue(
+        true, forKey: "developerExtrasEnabled")
     }
     messageHub.clearListeners()
   }

@@ -929,7 +929,7 @@ struct Preference {
     .userOptions: [[String]](),
     .useUserDefinedConfDir: false,
     .userDefinedConfDir: "~/.config/mpv/",
-    .iinaEnablePluginSystem: false,
+    .iinaEnablePluginSystem: true,
 
     .keepOpenOnFileEnd: true,
     .quitWhenNoOpenedWindow: false,
